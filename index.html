@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title> val</title>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="val2.css">
+</head>
+<body>
+<div class="container">
+  <label>
+    <div class="heart">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/Love_Heart_SVG.svg"></img>
+    </div>
+    <input id="messageState" type="checkbox" style="display:none"/>
+  </label>
+  <div class="message">
+    <h1>My Dearest</h1>
+    <p>As <span class="main"> Birthday</span> Happy Birthday, my love. Today, the world celebrates the day you were born—the day that brought light, laughter, and endless beauty into my life. You are not just the reason for my smile but the heartbeat of my every dream and the anchor of my every hope. Your presence makes ordinary days extraordinary, and every moment with you feels like magic woven into time. I’m so grateful for you, not just today but every single day of my life.
+    <span class ="main2">You are the one I wished for when I blew out every birthday candle of my own.”</span>
+      </p>
+         <div class="buttons">
+            <button class="btn " id="yesButton" onclick="nextPage()">NEXT</button>
+        </div>
+        <p><span class="main"> ~Your </span></p>
+  </div>
+</div>
+
+<script>
+   $("#messageState").on("change", (x) => {
+    $(".message").removeClass("openNor").removeClass("closeNor");
+    if ($("#messageState").is(":checked")) {
+      $(".message")
+        .removeClass("closed")
+        .removeClass("no-anim")
+        .addClass("openNor");
+      $(".heart")
+        .removeClass("closeHer")
+        .removeClass("openedHer")
+        .addClass("openHer");
+      $(".container").stop().animate({ backgroundColor: "#f48fb1" }, 2000);
+      console.log("Abrindo");
+    } else {
+      $(".message").removeClass("no-anim").addClass("closeNor");
+      $(".heart")
+        .removeClass("openHer")
+        .removeClass("openedHer")
+        .addClass("closeHer");
+      $(".container").stop().animate({ backgroundColor: "#fce4ec" }, 2000);
+      console.log("fechando");
+    }
+  });
+  
+  $(".message").on(
+    "webkitAnimationEnd oanimationend msAnimationEnd animationend",
+    function (e) {
+      console.log("Animation End");
+      if ($(".message").hasClass("closeNor")) $(".message").addClass("closed");
+      $(".message")
+        .removeClass("openNor")
+        .removeClass("closeNor")
+        .addClass("no-anim");
+    }
+  );
+  
+  $(".heart").on(
+    "webkitAnimationEnd oanimationend msAnimationEnd animationend",
+    function (e) {
+      console.log("Animation End");
+      if (!$(".heart").hasClass("closeHer"))
+        $(".heart").addClass("openedHer").addClass("beating");
+      else $(".heart").addClass("no-anim").removeClass("beating");
+      $(".heart").removeClass("openHer").removeClass("closeHer");
+    }
+  );
+  function nextPage() {
+    window.location.href = "index2.html";
+  }
+  </script>
+</body>
+</html>
